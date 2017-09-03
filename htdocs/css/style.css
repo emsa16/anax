@@ -1,0 +1,71 @@
+html {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Cambria, Georgia, Times, 'Times New Roman', serif;
+}
+
+body {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.header-wrap {
+    background-color: lightgrey;
+}
+
+.site-title {
+  font-size: 2.8em;
+}
+
+.site-slogan {
+  font-style: italic;
+}
+
+.navbar ul {
+  text-align: center;
+  list-style: none;
+}
+
+.navbar ul li {
+  display: inline-block;
+  margin: 0 0.5em;
+}
+
+.navbar a {
+  text-decoration: none;
+}
+
+.current {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+}
+
+footer {
+  clear: both;
+  text-align: center;
+  font-size: 13px;
+  color: grey;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.center {
+  text-align: center;
+}
+
+.thumb {
+  width: 150px;
+}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5126d3acdb2705d996323e6cbb843790",
+    "content-hash": "4336c64413180a75dac24125be3ac320",
     "packages": [
         {
             "name": "anax/common",

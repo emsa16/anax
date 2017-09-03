@@ -1,4 +1,13 @@
 {
+    "name": "emsa/anax",
+    "description": "Modular PHP framework.",
+    "license": "MIT",
+    "authors": [
+            {
+                "name": "Emil Sandberg",
+                "email": "emil.hietanen@gmail.com"
+            }
+    ],
     "require": {
         "anax/request": "^1.0",
         "anax/url": "^1.0",
@@ -12,6 +21,9 @@
         "mos/cimage": "^0.7.19"
     },
     "autoload": {
-        "psr-4": {"Anax\\": "src/"}
+        "psr-4": {
+            "Anax\\": "src/",
+            "Emsa\\": "src/"
+        }
     }
 }
