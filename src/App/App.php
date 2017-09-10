@@ -24,9 +24,11 @@ class App
     {
         $data["stylesheets"] = ["css/style.css"];
 
+        $navbar = require ANAX_APP_PATH . "/config/navbar.php";
+
         // Add common header, navbar and footer
         $this->view->add("header", [], "header");
-        $this->view->add("navbar", [], "navbar");
+        $this->view->add("navbar", ["navbar" => $navbar], "navbar");
         $this->view->add("footer", [], "footer");
 
         // Add layout, render it, add to response and send.

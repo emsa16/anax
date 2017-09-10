@@ -8,6 +8,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
+    margin: 0;
+}
+
+.main-wrap,
+.header-wrap header {
   max-width: 960px;
   margin: 0 auto;
 }
@@ -69,4 +74,15 @@ footer {
 
 .thumb {
   width: 150px;
+}
+
+code {
+    padding: 2px;
+    background-color: #eee;
+}
+
+pre {
+    background-color: #eee;
+    padding: 0.5em;
+    border-left: 2px solid #ccc;
 }

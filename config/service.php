@@ -12,7 +12,9 @@ $app->router     = new \Anax\Route\RouterInjectable();
 $app->view       = new \Anax\View\ViewContainer();
 $app->textfilter = new \Anax\TextFilter\TextFilter();
 $app->session    = new \Anax\Session\SessionConfigurable();
-$app->navbar     = new \Emsa\Navbar\Navbar();
+$app->routeController = new \Emsa\Route\RouteController();
+$app->rem        = new \Anax\RemServer\RemServer();
+$app->remController = new \Anax\RemServer\RemServerController();
 
 // Configure request
 $app->request->init();
@@ -22,6 +24,16 @@ $app->router->setApp($app);
 
 // Configure session
 $app->session->configure("session.php");
+
+// Init controller for Route class
+$app->routeController->setApp($app);
+
+// Init REM Server
+$app->rem->configure("remserver.php");
+$app->rem->inject(["session" => $app->session]);
+
+// Init controller for the REM Server
+$app->remController->setApp($app);
 
 // Configure url
 $app->url->setSiteUrl($app->request->getSiteUrl());
@@ -35,11 +47,6 @@ $app->url->setDefaultsFromConfiguration();
 // Configure view
 $app->view->setApp($app);
 $app->view->configure("view.php");
-
-// Inject $app into the navbar container to make available for navbar class.
-$app->navbar->setApp($app);
-// Configure navbar to include content of current project.
-$app->navbar->configure("navbar.php");
 
 // Return the populated $app
 return $app;

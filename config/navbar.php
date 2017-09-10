@@ -20,5 +20,9 @@ return [
             "text" => "Redovisningar",
             "route" => "report",
         ],
+        "remserver" => [
+            "text" => "REM-server",
+            "route" => "remserver",
+        ],
     ]
 ];
