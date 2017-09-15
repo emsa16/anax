@@ -86,3 +86,53 @@ pre {
     padding: 0.5em;
     border-left: 2px solid #ccc;
 }
+
+.comments {
+    margin: 20px 0;
+    /*background-color: green;*/
+}
+
+.entry {
+    padding: 10px 0;
+}
+
+.entry img {
+    float: left;
+    padding-top: 5px;
+    padding-right: 10px;
+}
+
+.stats {
+    color: grey;
+    font-size: 0.9em;
+}
+
+.actions {
+    font-size: 0.9em;
+    margin-bottom: 1em;
+}
+
+.actions a {
+    color: grey;
+}
+
+.text {
+    /*font-family: serif;*/
+}
+
+.children {
+    margin-left: 40px;
+    padding-left: 15px;
+    border-left: 3px solid lightgrey;
+    /*background-color: red;*/
+}
+
+.delConfirm {
+    border: 1px solid black;
+    margin: 5px 0 20px;
+    padding: 5px
+}
+
+.delButton {
+    background-color: red;
+}

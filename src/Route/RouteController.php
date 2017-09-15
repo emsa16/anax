@@ -25,8 +25,8 @@ class RouteController implements AppInjectableInterface
     {
         // Get the current route and see if it matches a content/file
         $path = $this->app->request->getRoute();
-        $file1 = ANAX_INSTALL_PATH . "/content/${path}.md";
-        $file2 = ANAX_INSTALL_PATH . "/content/${path}/index.md";
+        $file1 = ANAX_INSTALL_PATH . "/content/{$path}.md";
+        $file2 = ANAX_INSTALL_PATH . "/content/{$path}/index.md";
 
         $file = is_file($file1) ? $file1 : null;
         $file = is_file($file2) ? $file2 : $file;

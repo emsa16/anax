@@ -12,9 +12,11 @@ $app->router     = new \Anax\Route\RouterInjectable();
 $app->view       = new \Anax\View\ViewContainer();
 $app->textfilter = new \Anax\TextFilter\TextFilter();
 $app->session    = new \Anax\Session\SessionConfigurable();
-$app->routeController = new \Emsa\Route\RouteController();
-$app->rem        = new \Anax\RemServer\RemServer();
-$app->remController = new \Anax\RemServer\RemServerController();
+$app->routeController   = new \Emsa\Route\RouteController();
+$app->rem               = new \Anax\RemServer\RemServer();
+$app->remController     = new \Anax\RemServer\RemServerController();
+$app->comment           = new \Emsa\Comment\Comment();
+$app->commentController = new \Emsa\Comment\CommentController();
 
 // Configure request
 $app->request->init();
@@ -34,6 +36,9 @@ $app->rem->inject(["session" => $app->session]);
 
 // Init controller for the REM Server
 $app->remController->setApp($app);
+
+// Init controller for the REM Server
+$app->commentController->setApp($app);
 
 // Configure url
 $app->url->setSiteUrl($app->request->getSiteUrl());

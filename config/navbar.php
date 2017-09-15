@@ -24,5 +24,9 @@ return [
             "text" => "REM-server",
             "route" => "remserver",
         ],
+        "comment" => [
+            "text" => "Kommentarsystem",
+            "route" => "comment",
+        ],
     ]
 ];
