@@ -9,11 +9,11 @@ namespace Anax\App;
  */
 class App
 {
-    public function redirect($url)
-    {
-        $this->response->redirect($this->url->create($url));
-        exit;
-    }
+    // public function redirect($url)
+    // {
+    //     $this->response->redirect($this->url->create($url));
+    //     exit;
+    // }
 
 
 

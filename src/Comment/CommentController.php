@@ -2,30 +2,30 @@
 
 namespace Emsa\Comment;
 
-use \Anax\Common\AppInjectableInterface;
-use \Anax\Common\AppInjectableTrait;
+use \Anax\DI\InjectionAwareInterface;
+use \Anax\DI\InjectionAwareTrait;
 
 /**
  * A controller for the comment system.
  *
  * @SuppressWarnings(PHPMD.ExitExpression)
  */
-class CommentController implements AppInjectableInterface
+class CommentController implements InjectionAwareInterface
 {
-    use AppInjectableTrait;
+    use InjectionAwareTrait;
 
 
 
     public function showComments($postid)
     {
-        $allComments = $this->app->rem->getDataset("comments");
-        $postComments = $this->app->comment->getCommentsForPost($postid, $allComments);
-        $hierarchedComments = $this->app->comment->buildTree($postComments);
-        $baseUrl = $this->app->url->create("comment/$postid");
-        $actionCommentDetails = $this->app->comment->getActionCommentDetails($this->app->request);
-        $commentSection = $this->app->comment->buildCommentSection($hierarchedComments, $this->app->textfilter, $baseUrl, $actionCommentDetails["actionCommentId"], $actionCommentDetails["actionCommentMethod"]);
-        $commentBox = $this->app->comment->buildNewCommentBox($baseUrl, $postid);
-        $this->app->view->add("comments", [
+        $allComments = $this->di->rem->getDataset("comments");
+        $postComments = $this->di->comment->getCommentsForPost($postid, $allComments);
+        $hierarchedComments = $this->di->comment->buildTree($postComments);
+        $baseUrl = $this->di->url->create("comment/$postid");
+        $actionCommentDetails = $this->di->comment->getActionCommentDetails($this->di->request);
+        $commentSection = $this->di->comment->buildCommentSection($hierarchedComments, $this->di->textfilter, $baseUrl, $actionCommentDetails["actionCommentId"], $actionCommentDetails["actionCommentMethod"]);
+        $commentBox = $this->di->comment->buildNewCommentBox($baseUrl, $postid);
+        $this->di->view->add("comments", [
             "commentBox" => $commentBox,
             "comments" => $commentSection,
             "postid" => $postid
@@ -36,36 +36,36 @@ class CommentController implements AppInjectableInterface
 
     public function createComment($postid)
     {
-        $postValues = $this->app->request->getPost();
-        $entry = $this->app->comment->compileNewComment($postValues);
-        $item = $this->app->rem->addItem("comments", $entry);
+        $postValues = $this->di->request->getPost();
+        $entry = $this->di->comment->compileNewComment($postValues);
+        $item = $this->di->rem->addItem("comments", $entry);
         $commentid = $item["id"];
-        $this->app->redirect("comment/$postid#$commentid");
+        $this->di->response->redirect("comment/$postid#$commentid");
     }
 
 
 
     public function editComment($postid)
     {
-        $postValues = $this->app->request->getPost();
-        $item = $this->app->rem->getItem("comments", (int)$postValues["id"]);
+        $postValues = $this->di->request->getPost();
+        $item = $this->di->rem->getItem("comments", (int)$postValues["id"]);
         $item["text"] = $postValues["text"];
-        $item = $this->app->rem->upsertItem("comments", (int)$postValues["id"], $item);
+        $item = $this->di->rem->upsertItem("comments", (int)$postValues["id"], $item);
         $commentid = $item["id"];
-        $this->app->redirect("comment/$postid#$commentid");
+        $this->di->response->redirect("comment/$postid#$commentid");
     }
 
 
 
     public function deleteComment($postid)
     {
-        $postValues = $this->app->request->getPost();
+        $postValues = $this->di->request->getPost();
         if (isset($postValues["cancel"])) {
             $commentId = $postValues["id"];
-            $this->app->redirect("comment/$postid#$commentId");
+            $this->di->response->redirect("comment/$postid#$commentId");
             exit;
         }
-        $this->app->rem->deleteItem("comments", (int)$postValues["id"]);
-        $this->app->redirect("comment/$postid");
+        $this->di->rem->deleteItem("comments", (int)$postValues["id"]);
+        $this->di->response->redirect("comment/$postid");
     }
 }
