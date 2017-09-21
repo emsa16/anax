@@ -35,6 +35,12 @@ return [
             "path" => "{postid:digit}/delete",
             "callable" => ["commentController", "deleteComment"]
         ],
+        [
+            "info" => "Up-/downvote content",
+            "requestMethod" => "post",
+            "path" => "{postid:digit}/vote",
+            "callable" => ["commentController", "voteComment"]
+        ],
     ]
 ];
 
