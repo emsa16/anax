@@ -103,6 +103,33 @@ Jag har skapat en `Comment`-klass och en `CommentController`-klass för att hant
 Kursmoment 03
 -------------
 
+### Hur känns det att jobba med begreppen kring dependency injection, service locator och lazy loading?
+De nya begreppen som introducerades detta kursmoment är ganska självförklarande och därför ganska lätta att ta till sig. Just på me-sidan kanske inte lazy loading har så stor betydelse men jag gillar konceptet. Det känns som en väldigt bra princip att inte ladda in något i onödan. Nu syns ju vilka paket man laddar in bara på `debug/info`-sidan, så variationen mellan vilka moduler som laddas in på olika sidor blir inte så visualiserad, men vetskapen om att så sker är rogivande. DI-begreppet innebär en klar förbättring av strukturen och gör delarna mer modulära och självständiga än tidigare.
+Service locator-begreppet har jag dock lite svårare att greppa. Det verkar så likt dependency injection container att jag först tänker att det är samma sak, men vid mer efterforskning så verkar de vara två olika lösningar på samma problem, och service locator verkar även anses som ett dåligt mönster. Vad jag lyckats uttyda så verkar service locator innebära att klassen är beroende av denna service container, medan dependency injection innebär att beroenden skickas in till klassen helt och hållet utifrån så att klassen inte behöver veta något om detta.
+
+### Hur känns det att göra dig av med beroendet till $app, blir $id bättre?
+Jag tycker att koden blir redigare och bättre strukturerad med $di. Skillnaden är kanske inte direkt stor i och med att jag mest bara flyttat över $app-konceptet till $di. Jag uppskattar ändå config-filen di.php, då den är mycket mer överskådlig än den gamla service.php.
+
+### Hur känns det att återigen göra refaktoring på din me-sida, blir det förbättringar på kodstrukturen, eller bara annorlunda?
+Det var inte så omfattande arbete denna gång att refaktorera om till en sida med di-konstruktion. I mina egna klasser har jag bara bytt app mot di tack vare att jag använder mig av InjectionMagicTrait så att jag inte behöver ändra `$this->di->request` till `$this->di->get(”request”);`. Även om den senare tydligare visar att jag använder en di-konstruktion nu så är den förra mer lättläslig. Det nya sättet att skriva routes känns också tydligare. Istället för att ha allting i routen på en rad har de nya route-filerna en tydlig struktur genom arrayer med bestämda nyckelvärden. På det hela taget tycker jag att denna omgång av refaktorering kändes bra då den med små medel förtydligade mycket.
+
+### Lyckades du införa begreppen kring DI när du vidareutvecklade ditt kommentarssystem?
+Jag tror att jag infört begreppen kring DI i mitt kommentarssystem, men är lite osäker på vad omfattningen av DI kan innebära för mina klasser. Som jag nämnde ovan så bytte jag bara ut app mot di i min kontroller-klass. Min modellklass för kommentarssystemet har sedan tidigare ingen vetskap om $di, utan jag skickar in eventuella moduler som behövs genom argument direkt i metodanropet till modellklassen.
+
+### Påbörjade du arbetet (hur gick det) med databasmodellen eller avvaktar du till kommande kmom?
+Jag väljer att avvakta med databasen, eftersom jag inte vill börja fixa på en lösning om det ändå kommer att komma ytterligare instruktioner i nästa kursmoment. Jag har inte heller gjort så mycket mer på den nuvarande lösningen där jag sparar kommentarerna genom remservern, eftersom det ändå bara är en mockup inför den stundande databas-implementationen.
+
+Jag har istället valt att lägga till en del småfunktionalitet som prioriterats bort i förra kursmomentet. Det går nu att sortera kommentarerna efter flest poäng, nyaste eller äldsta. Trädstrukturen följer sorteringsmetoden, i stil med Reddit. Sidan sorterar automatiskt på de bästa kommentarerna, vilket kanske inte blir så tydligt när mängden kommentarer är små, men får stor effekt på hur man kan följa intressanta kommentarskedjor när det finns många kommentarer och många som röstat.
+
+Jag har även lagt in gränssnitt och funktionalitet för att kunna rösta upp och ner kommentarer. Eftersom det just nu inte finns användare implementerade så är möjligheten att rösta obegränsad. Vidare har jag ändrat beteendet för raderade kommentarer, istället för att ta bort dem rakt av så markeras kommentaren med en radera-flagga i systemet och texten syns inte i kommentarsfältet men noden blir kvar i hierarkin, istället för att hela den underliggande kedjan skulle tas bort tillsammans med den kommentar som raderas. Gränssnittet visar nu även när en kommentar senast redigerats. Tiden när en kommentar lagts till visar nu istället för ett datum en sträng i stilen ’x minuter sedan’.
+
+`buildCommentSection`-metoden är fortfarande för stor och komplex, och validatorn har även klagat över cyclomatic complexity som stigit för högt i den. Jag har temporärt fixat detta med att ganska godtyckligt lyfta över en del kod i separata metoder, men det är inte gjort på ett bra sätt, så jag vill ännu justera detta.
+
+### Allmänna kommentare kring din me-sida och dess kodstruktur?
+Jag har nu valt att använda `\Anax\Page\PageRender()`-klassen i mitt ramverk, såsom artiklarna gjort. Detta är det mest logiska att använda när jag nu har modulen Page med och använder den i övrigt i mina routes. Dock kräver det att jag går in och justerar i `renderPage`-metoden för att få med header, navbar och footer. Detta känns inte så kul när denna klass ligger i min vendor-mapp och jag inte riktigt tycker om att gå in och ändra där. Det jag eventuellt kommer att göra är att återgå till att använda `renderPage`-metoden i min app-klass, eftersom den ligger i min egen src-mapp, och då känns det ok att rota mer i koden. Vi får se.
+
+
+
 Kursmoment 04
 -------------
 
