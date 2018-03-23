@@ -28,5 +28,9 @@ return [
             "text" => "Kommentarsystem",
             "route" => "comment",
         ],
+        "books" => [
+            "text" => "Böcker",
+            "route" => "book",
+        ],
     ]
 ];

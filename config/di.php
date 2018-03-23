@@ -42,7 +42,7 @@ return [
             "callback" => function () {
                 $router = new \Anax\Route\Router();
                 $router->setDI($this);
-                $router->configure("route2.php");
+                $router->configure("route.php");
                 return $router;
             }
         ],
@@ -65,9 +65,11 @@ return [
         ],
         "session" => [
             "shared" => true,
+            "active" => true,
             "callback" => function () {
                 $session = new \Anax\Session\SessionConfigurable();
                 $session->configure("session.php");
+                $session->start();
                 return $session;
             }
         ],
@@ -133,6 +135,30 @@ return [
             "callback" => function () {
                 $obj = new \Anax\Page\PageRender();
                 $obj->setDI($this);
+                return $obj;
+            }
+        ],
+        "db" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new \Anax\Database\DatabaseQueryBuilder();
+                $obj->configure("database.php");
+                return $obj;
+            }
+        ],
+        'manager' => [
+            'shared' => true,
+            'callback' => function () {
+                $obj = new \LRC\Repository\RepositoryManager();
+                return $obj;
+            }
+        ],
+        "bookController" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new \Anax\Book\BookController();
+                $obj->setDI($this);
+                $obj->configure();
                 return $obj;
             }
         ],

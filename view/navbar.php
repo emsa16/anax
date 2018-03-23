@@ -1,5 +1,5 @@
 <?php
-$current = $app->request->getCurrentUrl();
+$current = $this->currentUrl();
 ?>
 
 <nav
@@ -12,10 +12,10 @@ $current = $app->request->getCurrentUrl();
     <ul>
         <?php foreach ($navbar["items"] as $item) : ?>
             <li
-            <?php if ($app->url->create($item["route"]) === $current) : ?>
+            <?php if ($this->url($item["route"]) === $current) : ?>
                  class='current'
             <?php endif; ?>
-            ><a href='<?= $app->url->create($item["route"]) ?>'><?= $item["text"] ?></a></li>
+            ><a href='<?= $this->url($item["route"]) ?>'><?= $item["text"] ?></a></li>
         <?php endforeach; ?>
     </ul>
 </nav>

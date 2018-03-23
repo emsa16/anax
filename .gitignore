@@ -2,3 +2,5 @@
 /build
 /vendor
 .DS_Store
+/sql/ddl/book_mysql.sql
+/config/database.php

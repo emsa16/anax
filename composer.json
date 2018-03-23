@@ -20,12 +20,14 @@
         "symfony/yaml": "^3.3",
         "mos/cimage": "^0.7.19",
         "anax/di": "^1.0",
-        "anax/page": "^1.0"
+        "anax/page": "^1.0",
+        "lrc-se/anax-repository": "^1.1"
     },
     "autoload": {
         "psr-4": {
             "Anax\\": "src/",
-            "Emsa\\": "src/"
+            "Emsa\\": "src/",
+            "LRC\\": "src/"
         }
     }
 }

@@ -1,2 +1,2 @@
 # anax
-me-page for ramverk1 course, BTH 2017
+me-page for ramverk1 course, BTH 2018
