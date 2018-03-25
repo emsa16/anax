@@ -8,13 +8,11 @@ $books = isset($books) ? $books : null;
 
 // Create urls for navigation
 $urlToCreate = $this->url("book/create");
-$urlToDelete = $this->url("book/delete");
 
 ?><h1><?= $header ?></h1>
 
 <p>
-    <a href="<?= $urlToCreate ?>">Lägg till</a> |
-    <a href="<?= $urlToDelete ?>">Radera</a>
+    <a href="<?= $urlToCreate ?>">Lägg till</a>
 </p>
 
 <?php if (!$books) : ?>

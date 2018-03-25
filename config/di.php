@@ -101,8 +101,9 @@ return [
         "commentController" => [
             "shared" => true,
             "callback" => function () {
-                $comment = new \Emsa\Comment\CommentController();
+                $comment = new \Emsa\Comment\CommentController2();
                 $comment->setDI($this);
+                $comment->configure();
                 return $comment;
             }
         ],

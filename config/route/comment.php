@@ -5,33 +5,33 @@
 
 return [
     "routes" => [
-        [
-            "info" => "Start the session and initiate the REM Server.",
-            "requestMethod" => null,
-            "path" => "**",
-            "callable" => ["remController", "anyPrepare"]
-        ],
+        // [
+        //     "info" => "Start the session and initiate the REM Server.",
+        //     "requestMethod" => null,
+        //     "path" => "**",
+        //     "callable" => ["remController", "anyPrepare"]
+        // ],
         [
             "info" => "Show the comments for requested post.",
-            "requestMethod" => "get",
+            "requestMethod" => "get|post",
             "path" => "{postid:digit}",
             "callable" => ["commentController", "showComments"]
         ],
         [
-            "info" => "Create a new item and add to the dataset",
-            "requestMethod" => "post",
-            "path" => "{postid:digit}/post",
-            "callable" => ["commentController", "createComment"]
+            "info" => "Reply to an existing comment",
+            "requestMethod" => "get|post",
+            "path" => "{postid:digit}/reply",
+            "callable" => ["commentController", "replyComment"]
         ],
         [
             "info" => "Edit comment",
-            "requestMethod" => "post",
+            "requestMethod" => "get|post",
             "path" => "{postid:digit}/edit",
             "callable" => ["commentController", "editComment"]
         ],
         [
             "info" => "Delete comment from dataset",
-            "requestMethod" => "post",
+            "requestMethod" => "get|post",
             "path" => "{postid:digit}/delete",
             "callable" => ["commentController", "deleteComment"]
         ],

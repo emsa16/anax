@@ -3,4 +3,5 @@
 /vendor
 .DS_Store
 /sql/ddl/book_mysql.sql
+/sql/ddl/comment_mysql.sql
 /config/database.php

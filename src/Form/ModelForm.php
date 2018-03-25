@@ -289,7 +289,9 @@ class ModelForm
      */
     public function textarea($prop, $attrs = [])
     {
-        return '<textarea ' . $this->getAttributeString($prop, $attrs) . '>' . htmlspecialchars($this->getFieldValue($prop)) . '</textarea>';
+        //Note: Text does not seem to need to be sanitized since it is inside a textarea field
+        return '<textarea ' . $this->getAttributeString($prop, $attrs) . '>' . $this->getFieldValue($prop) . '</textarea>';
+        // return '<textarea ' . $this->getAttributeString($prop, $attrs) . '>' . htmlspecialchars($this->getFieldValue($prop)) . '</textarea>';
     }
 
 
