@@ -33,7 +33,7 @@ class BaseModel
      */
     public function isNullable($attr)
     {
-        return in_array($attr, $this->nullables);
+        return $this->nullables && in_array($attr, $this->nullables);
     }
 
 
@@ -43,14 +43,15 @@ class BaseModel
      * @param string                                $attr       Name of foreign key attribute.
      * @param \LRC\Database\SoftRepositoryInterface $repository Repository to query.
      * @param bool                                  $soft       Whether to take soft-deletion into account.
+     * @param string|null                           $key        Key column name (pass null to use registered primary key).
      *
      * @return mixed                                Model instance if found, null otherwise.
      */
-    public function getReference($attr, $repository, $soft = true)
+    public function getReference($attr, $repository, $soft = true, $key = null)
     {
         if (isset($this->$attr)) {
             $method = ($soft ? 'findSoft' : 'find');
-            return ($repository->$method('id', $this->$attr) ?: null);
+            return ($repository->$method($key, $this->$attr) ?: null);
         }
         return null;
     }

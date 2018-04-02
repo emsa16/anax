@@ -23,7 +23,7 @@ class RemServerController implements InjectionAwareInterface
      */
     public function anyPrepare()
     {
-        $session = $this->di->get("session");
+        // $session = $this->di->get("session");
         $rem     = $this->di->get("rem");
 
         // Session is now always started as soon as Session module is loaded.

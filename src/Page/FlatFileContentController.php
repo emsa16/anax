@@ -23,12 +23,12 @@ class FlatFileContentController implements InjectionAwareInterface
     {
         // Get the current route and see if it matches a content/file
         $path = $this->di->get("request")->getRoute();
-        $file1 = ANAX_INSTALL_PATH . "/content/${path}.md";
-        $file2 = ANAX_INSTALL_PATH . "/content/${path}/index.md";
+        $file1 = ANAX_INSTALL_PATH . "/content/$path.md";
+        $file2 = ANAX_INSTALL_PATH . "/content/$path/index.md";
 
         $routeParts = $this->di->get("request")->getRouteParts();
         $altPath = implode("/", array_slice($routeParts, 0, -1));
-        $file3 = ANAX_INSTALL_PATH . "/content/${altPath}.md";
+        $file3 = ANAX_INSTALL_PATH . "/content/$altPath.md";
 
         $file = is_file($file1) ? $file1 : null;
         $file = is_file($file2) ? $file2 : $file;

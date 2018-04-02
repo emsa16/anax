@@ -12,9 +12,6 @@ $actionUrl = $this->url("comment/$postid/$method");
 
     <input type="hidden" name="post_id" value="<?= $postid ?>">
 
-    <!-- TEMP FÖR ATT TESTA -->
-    <?= $form->input('user', 'email', ['required' => true]) ?>
-
     <?= $form->textarea("content", ['rows' => '6', 'cols' => '60', 'required' => true]) ?>
     <?php if ($form->hasError('content')) : ?>
         <div class="form-error"><?= $form->getError('content') ?></div>

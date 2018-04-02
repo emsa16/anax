@@ -1,6 +1,7 @@
 <?php foreach ($comments as $comment) : ?>
     <?php
-    $gravatarString = md5(strtolower(trim($comment->user)));
+    $email = !$comment->user['deleted'] ? $comment->user['email'] : 'deleted@example.com';
+    $gravatarString = md5(strtolower(trim($email)));
     $points = ( (int)$comment->upvote - (int)$comment->downvote );
     $created = $comment->timeElapsedString($comment->created);
     $edited = $comment->edited ? ", redigerad " . $comment->timeElapsedString($comment->edited) : "";
@@ -16,7 +17,7 @@
         <img src='http://www.gravatar.com/avatar/<?= $gravatarString ?>.jpg?d=identicon&s=40'>
 
         <div class='stats'>
-            <?= $points ?> poäng | av <?= $comment->user ?> tillagd <?= $created . $edited ?>
+            <?= $points ?> poäng | av <?= !$comment->user['deleted']  ? $comment->user['username'] : '[raderad]' ?> | tillagd <?= $created . $edited ?>
         </div>
 
         <?php if ($action == "edit" && $actionID == $comment->id) : ?>
@@ -28,10 +29,12 @@
         <?php endif; ?>
 
         <div class='actions'>
-            <a href='<?= $this->url("comment/$postid/reply?id={$comment->id}#{$comment->id}") ?>'>svara</a>
-            <?php if (!$comment->deleted) : ?>
-                | <a href='<?= $this->url("comment/$postid/edit?id={$comment->id}#{$comment->id}") ?>'>redigera</a>
-                | <a href='<?= $this->url("comment/$postid/delete?id={$comment->id}#{$comment->id}") ?>'>radera</a>
+            <?php if ($isLoggedIn) : ?>
+                <a href='<?= $this->url("comment/$postid/reply?id={$comment->id}#{$comment->id}") ?>'>svara</a>
+                <?php if (!$comment->deleted && ($comment->user['isAdmin'] || $comment->user['isOwner'])) : ?>
+                    | <a href='<?= $this->url("comment/$postid/edit?id={$comment->id}#{$comment->id}") ?>'>redigera</a>
+                    | <a href='<?= $this->url("comment/$postid/delete?id={$comment->id}#{$comment->id}") ?>'>radera</a>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
 
@@ -42,8 +45,8 @@
         <?php endif; ?>
 
         <div class='children'>
-            <?php if ( isset($comment->children) ) : ?>
-                <?= $this->renderView('comment/comment-tree', ["comments" => $comment->children, "textfilter" => $textfilter, "postid" => $postid, "action" => $action, "actionID" => $actionID, "form" => $form]) ?>
+            <?php if (isset($comment->children)) : ?>
+                <?= $this->renderView('comment/comment-tree', ["comments" => $comment->children, "textfilter" => $textfilter, "postid" => $postid, "action" => $action, "actionID" => $actionID, "form" => $form, "isLoggedIn" => $isLoggedIn]) ?>
             <?php endif; ?>
         </div>
     </div>

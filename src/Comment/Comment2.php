@@ -10,6 +10,7 @@ use \LRC\Common\ValidationInterface;
  * Comment class.
  *
  * @SuppressWarnings(PHPMD.ExitExpression)
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class Comment2 extends BaseModel implements ValidationInterface
 {

@@ -82,6 +82,8 @@ trait ValidationTrait
      * @param string    $attr   Model attribute to validate.
      *
      * @return bool             True if the attribute validates, false otherwise.
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     private function validateRule($rule, $attr)
     {
@@ -103,6 +105,12 @@ trait ValidationTrait
                 break;
             case 'email':
                 $passed = (preg_match('/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/', $this->$attr) == 1);
+                break;
+            case 'forbidden-characters':
+                $passed = (preg_match('/['.$rule['value'].']/', $this->$attr) == 0);
+                break;
+            case 'match':
+                $passed = ($this->{$rule['value']} === $this->$attr);
                 break;
             case 'custom':
                 $passed = $rule['value']($attr, $this->$attr);

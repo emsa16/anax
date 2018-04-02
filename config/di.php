@@ -103,7 +103,7 @@ return [
             "callback" => function () {
                 $comment = new \Emsa\Comment\CommentController2();
                 $comment->setDI($this);
-                $comment->configure();
+                $comment->init();
                 return $comment;
             }
         ],
@@ -159,7 +159,25 @@ return [
             "callback" => function () {
                 $obj = new \Anax\Book\BookController();
                 $obj->setDI($this);
-                $obj->configure();
+                $obj->init();
+                return $obj;
+            }
+        ],
+        "userController" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new \Emsa\User\UserController();
+                $obj->setDI($this);
+                $obj->init();
+                return $obj;
+            }
+        ],
+        "userAdminController" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new \Emsa\User\UserAdminController();
+                $obj->setDI($this);
+                $obj->init();
                 return $obj;
             }
         ],

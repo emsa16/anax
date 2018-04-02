@@ -140,3 +140,16 @@ pre {
 .delButton {
     background-color: red;
 }
+
+label.has-error {
+    color: red;
+    /* background-color: rgba(255, 0, 0, 0.5); */
+}
+
+.form-error {
+    display: inline;
+}
+
+.delete, .delete a {
+    color: red;
+}

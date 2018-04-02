@@ -28,7 +28,7 @@ class BookController implements InjectionAwareInterface
     /**
      * Configuration.
      */
-    public function configure()
+    public function init()
     {
         $this->books = $this->di->manager->createRepository(Book::class, [
             'db' => $this->di->db,

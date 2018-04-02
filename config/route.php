@@ -32,6 +32,21 @@ return [
             "file" => __DIR__ . "/route/book.php",
         ],
         [
+            // Login routes
+            "mount" => null,
+            "file" => __DIR__ . "/route/login.php",
+        ],
+        [
+            // User routes
+            "mount" => "user",
+            "file" => __DIR__ . "/route/user.php",
+        ],
+        [
+            // User routes
+            "mount" => "admin",
+            "file" => __DIR__ . "/route/admin.php",
+        ],
+        [
             // To read flat file content in Markdown from content/
             "mount" => null,
             "file" => __DIR__ . "/route/flat-file-content.php",
