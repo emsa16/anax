@@ -133,6 +133,29 @@ Jag har nu valt att använda `\Anax\Page\PageRender()`-klassen i mitt ramverk, s
 Kursmoment 04
 -------------
 
+### Hur gick det att integrera formulärhantering och databashantering i ditt kommentarssystem?
+Jag valde att använda mig av de lösningar som LRC byggt med designmönstret Repository och även hans motsvarighet till HTMLForm-klasserna, istället för de moduler som angivits i kursmomentet. Efter att ha läst forumdiskussionerna om att de inte är så MVC-korrekta valde jag denna väg för att bättre förstå MVC och hur en modul som använder sig av MVC på ett strängare sätt fungerar. Detta blev början på en lång och svår resa och jag har spenderat otaliga timmar med att analysera den nya koden och förstå hur jag kan använda den. Jag ska inte sticka under stol med att jag tagit väldigt mycket från LRCs implementering, men jag vill ändå påstå att detta inneburit mer arbete än att scaffolda fram och flytta runt lite filer, då jag mödosamt byggt upp en ny struktur steg för steg.
+
+Jag har blivit tvungen att göra om precis allt på mitt kommentarssystem, en refactoring som ändå behövde göras, men blev absolut nödvändigt med de nya modulerna. Jag hoppades på att kunna skapa en bättre och tydligare MVC-struktur. Ju mer tid detta tog desto mer måste jag ändå åter börja avvika från stränga principer och nu har jag igen en del metoder som är lite för yviga och en grumlig gräns mellan modell, kontroll och vy.
+
+Jag inser nu att det finns vissa brister i de moduler jag valt att använda, eller troligen snarare i min förståelse för hur man använder dem. Allting känns mycket krångligare än någonsin förr och jag måste tänka igenom varenda steg otroligt länge för att inse vilken kod som ska användas, vilket känns som att det förstör syftet med att ha inkapslade moduler, där man ska ha ett begripligt gränssnitt att jobba mot. Även om koden må vara mer MVC-strukturerad så känns den mer begränsad och klumpig. Jag känner mig mer förvirrad än tidigare kring vilken kod som ska ligga i modeller och vilken i kontroller.
+
+Ett exempel på problem är när en rad i databasen ska uppdateras: min Repository hämtar inlägget från databasen och samarbetar med ModelForm-klassen för att användaren ska kunna uppdatera informationen. Som Repository funkar nu så uppdateras alla celler i tabellraden, även om vissa kolumner inte ens finns med för klienten att justeras utan är ämnade att endast hanteras inifrån databasen, såsom en ’updated’-kolumn som endast reagerar när andra celler uppdateras, men som hela tiden blev överskriven med ett null-värde. Detta fick jag alltså gå in och ändra manuellt i koden på varje ställe det riskerade ske, vilket inte känns smidigt.
+
+### Berätta om din syn på Active record och liknande upplägg, ser du fördelar och nackdelar?
+Efter att ha jämfört och haft mig mellan kursmomentets moduler och LRCs Repository-förslag så har jag svårt att se vilken struktur som är bättre. Det är så många saker att hålla i huvudet och att försöka greppa flödet och strukturerna som helhet överstiger min förmåga. Jag började med en förhoppning om att bättre förstå MVC och jag kan se att det finns en skillnad i hur modulerna arbetar, men jag kan inte avgöra vilken som är bättre, det är för komplext.
+
+### Utveckla din syn på koden du nu har i ramverket och din kommentars- och användarkod. Hur känns det?
+Allting fungerar just nu, men det ser inte vackert ut under huven och känns inte MVC, inte bra. Jag bävar inför nästa moment där koden ska lyftas ut i en egen modul, den känns alltför hårt kopplad till resten av koden. Jag har försökt att tänka om kring vyerna, och tillåta mig lägga in villkorssatser och dylikt där, så länge som det endast har att göra med presentationen. Men nu känns vyerna svårlästa och en del av presentationen sker också i modell/kontroller.
+
+### Om du vill, och har kunskap om, kan du även berätta om din syn på ORM och designmönstret Data Mapper som är närbesläktade med Active Record. Du kanske har erfarenhet av likande upplägg i andra sammanhang?
+Så mycket tid har gått åt till att implementera Repository att jag inte har tid kvar att studera andra lösningar just nu.
+
+### Vad tror du om begreppet scaffolding, kan det vara något att kika mer på?
+Som nämnts så använde jag mig inte av scaffolding på min anax-sida då jag inte använde de moduler som det fanns scaffolding för. Visst kan jag se nyttan med scaffolding i sammanhang där man har en förutbestämd arkitektur och bara vill lägga till nya sidor/sektioner. Har man alltså ett ramverk där alla grundbultarna är på plats så är det bra, men är det något som ska ändras i grunden så blir scaffoldingen värdelös.
+
+
+
 Kursmoment 05
 -------------
 
