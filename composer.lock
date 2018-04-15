@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "16a572b454dbf0f55ae8ec151cbd99a1",
+    "content-hash": "edb0c6f8f81b804d07185d6ffe0d782c",
     "packages": [
         {
             "name": "anax/common",
@@ -348,22 +348,22 @@
         },
         {
             "name": "anax/router",
-            "version": "v1.1.0",
+            "version": "v1.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/canax/router.git",
-                "reference": "9291048e58baf2c4e6207eb33ddd5f1c306eb06d"
+                "reference": "c7eb4e1b1ac8e88ea773c29e9ab863ebebee71dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/canax/router/zipball/9291048e58baf2c4e6207eb33ddd5f1c306eb06d",
-                "reference": "9291048e58baf2c4e6207eb33ddd5f1c306eb06d",
+                "url": "https://api.github.com/repos/canax/router/zipball/c7eb4e1b1ac8e88ea773c29e9ab863ebebee71dc",
+                "reference": "c7eb4e1b1ac8e88ea773c29e9ab863ebebee71dc",
                 "shasum": ""
             },
             "require": {
                 "anax/common": "1.0.*",
                 "anax/di": "1.0.*",
-                "php": ">=7.0"
+                "php": ">=5.6"
             },
             "type": "library",
             "autoload": {
@@ -392,7 +392,7 @@
                 "micro",
                 "mvc"
             ],
-            "time": "2018-03-16T14:43:54+00:00"
+            "time": "2017-09-28T19:44:36+00:00"
         },
         {
             "name": "anax/session",
@@ -595,6 +595,62 @@
                 "mvc"
             ],
             "time": "2018-03-14T16:46:56+00:00"
+        },
+        {
+            "name": "emsa/comment",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/emsa16/comment.git",
+                "reference": "2567e9cae2aaf1887fd46d2f04e0292371414bfd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/emsa16/comment/zipball/2567e9cae2aaf1887fd46d2f04e0292371414bfd",
+                "reference": "2567e9cae2aaf1887fd46d2f04e0292371414bfd",
+                "shasum": ""
+            },
+            "require": {
+                "anax/database": "^1.1",
+                "anax/di": "^1.0",
+                "anax/request": "^1.0",
+                "anax/response": "^1.0",
+                "anax/session": "^1.0",
+                "anax/textfilter": "^1.0",
+                "anax/view": "^1.0",
+                "lrc-se/anax-repository": "^1.1",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Emsa\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emil Sandberg",
+                    "email": "emil.hietanen@gmail.com",
+                    "homepage": "http://emilsandberg.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Comment module for Anax framework.",
+            "keywords": [
+                "boilerplate",
+                "education",
+                "framework",
+                "micro",
+                "mvc"
+            ],
+            "support": {
+                "issues": "https://github.com/canax/comment/issues",
+                "source": "https://github.com/emsa16/comment/tree/master"
+            },
+            "time": "2018-04-15T15:44:33+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -977,7 +1033,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "emsa/comment": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

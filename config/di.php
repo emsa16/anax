@@ -94,19 +94,6 @@ return [
                 return $rem;
             }
         ],
-        "comment" => [
-            "shared" => true,
-            "callback" => "\Emsa\Comment\Comment",
-        ],
-        "commentController" => [
-            "shared" => true,
-            "callback" => function () {
-                $comment = new \Emsa\Comment\CommentController2();
-                $comment->setDI($this);
-                $comment->init();
-                return $comment;
-            }
-        ],
         "errorController" => [
             "shared" => true,
             "callback" => function () {
@@ -157,7 +144,7 @@ return [
         "bookController" => [
             "shared" => true,
             "callback" => function () {
-                $obj = new \Anax\Book\BookController();
+                $obj = new \Emsa\Book\BookController();
                 $obj->setDI($this);
                 $obj->init();
                 return $obj;

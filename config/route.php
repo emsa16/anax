@@ -22,11 +22,6 @@ return [
             "file" => __DIR__ . "/route/remserver.php",
         ],
         [
-            // Comment system
-            "mount" => "comment",
-            "file" => __DIR__ . "/route/comment.php",
-        ],
-        [
             // Add routes from bookController and mount on book/
             "mount" => "book",
             "file" => __DIR__ . "/route/book.php",
@@ -49,6 +44,7 @@ return [
         [
             // To read flat file content in Markdown from content/
             "mount" => null,
+            "sort" => 500,
             "file" => __DIR__ . "/route/flat-file-content.php",
         ],
         [
