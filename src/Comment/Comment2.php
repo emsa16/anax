@@ -2,9 +2,9 @@
 
 namespace Emsa\Comment;
 
-use \LRC\Common\BaseModel;
-use \LRC\Common\ValidationTrait;
-use \LRC\Common\ValidationInterface;
+use \LRC\Form\BaseModel;
+use \LRC\Form\ValidationTrait;
+use \LRC\Form\ValidationInterface;
 
 /**
  * Comment class.

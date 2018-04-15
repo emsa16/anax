@@ -1,9 +1,10 @@
 <?php
-namespace LRC\Book;
 
-use \LRC\Common\BaseModel;
-use \LRC\Common\ValidationTrait;
-use \LRC\Common\ValidationInterface;
+namespace Emsa\Book;
+
+use \LRC\Form\BaseModel;
+use \LRC\Form\ValidationTrait;
+use \LRC\Form\ValidationInterface;
 
 /**
  * Book model class.

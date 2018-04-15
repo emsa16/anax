@@ -1,9 +1,10 @@
 <?php
+
 namespace Emsa\User;
 
-use \LRC\Common\BaseModel;
-use \LRC\Common\ValidationTrait;
-use \LRC\Common\ValidationInterface;
+use \LRC\Form\BaseModel;
+use \LRC\Form\ValidationTrait;
+use \LRC\Form\ValidationInterface;
 
 class LoginUser extends BaseModel implements ValidationInterface
 {

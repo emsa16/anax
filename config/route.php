@@ -54,6 +54,7 @@ return [
         [
             // Keep this last since its a catch all
             "mount" => null,
+            "sort" => 999,
             "file" => __DIR__ . "/route/404.php",
         ],
     ],

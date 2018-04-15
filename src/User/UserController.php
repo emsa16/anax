@@ -16,7 +16,7 @@ class UserController implements InjectionAwareInterface
 
 
     /**
-     * @var \LRC\Database\DbRepository  User repository.
+     * @var \LRC\Repository\DbRepository  User repository.
      */
     private $users;
 

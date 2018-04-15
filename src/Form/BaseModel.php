@@ -1,6 +1,6 @@
 <?php
 
-namespace LRC\Common;
+namespace LRC\Form;
 
 /**
  * Base class for models.
@@ -40,10 +40,10 @@ class BaseModel
     /**
      * Retrieve a reference by foreign key.
      *
-     * @param string                                $attr       Name of foreign key attribute.
-     * @param \LRC\Database\SoftRepositoryInterface $repository Repository to query.
-     * @param bool                                  $soft       Whether to take soft-deletion into account.
-     * @param string|null                           $key        Key column name (pass null to use registered primary key).
+     * @param string                                  $attr       Name of foreign key attribute.
+     * @param \LRC\Repository\SoftRepositoryInterface $repository Repository to query.
+     * @param bool                                    $soft       Whether to take soft-deletion into account.
+     * @param string|null                             $key        Key column name (pass null to use registered primary key).
      *
      * @return mixed                                Model instance if found, null otherwise.
      */

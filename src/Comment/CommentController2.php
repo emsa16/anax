@@ -16,7 +16,7 @@ class CommentController2 implements InjectionAwareInterface
 
 
     /**
-     * @var \LRC\Database\DbRepository  Book repository.
+     * @var \LRC\Repository\DbRepository  Book repository.
      */
     private $comments;
 

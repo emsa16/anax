@@ -1,6 +1,6 @@
 <?php
 
-namespace LRC\Common;
+namespace LRC\Form;
 
 /**
  * Model validation.

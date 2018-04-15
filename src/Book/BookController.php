@@ -1,9 +1,9 @@
 <?php
-namespace Anax\Book;
+
+namespace Emsa\Book;
 
 use \Anax\DI\InjectionAwareInterface;
 use \Anax\DI\InjectionAwareTrait;
-use \LRC\Book\Book as Book;
 use \LRC\Form\ModelForm as Modelform;
 
 /**
@@ -14,7 +14,7 @@ class BookController implements InjectionAwareInterface
     use InjectionAwareTrait;
 
     /**
-     * @var \LRC\Database\DbRepository  Book repository.
+     * @var \LRC\Repository\DbRepository  Book repository.
      */
     private $books;
 
