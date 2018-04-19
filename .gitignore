@@ -6,3 +6,4 @@
 /sql/ddl/comment_mysql.sql
 /sql/ddl/user_mysql.sql
 /config/database.php
+composer.lock
