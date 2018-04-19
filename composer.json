@@ -22,15 +22,8 @@
         "anax/di": "^1.0",
         "anax/page": "^1.0",
         "lrc-se/anax-repository": "^1.1",
-        "anax/database": "^1.1",
-        "emsa/comment": "dev-master"
+        "anax/database": "^1.1"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "https://github.com/emsa16/comment.git"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Anax\\": "src/",
