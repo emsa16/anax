@@ -3,6 +3,7 @@
 namespace Emsa\Book;
 
 use \LRC\Form\BaseModel;
+
 /**
  * Book model class.
  */
