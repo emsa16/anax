@@ -3,17 +3,11 @@
 namespace Emsa\Book;
 
 use \LRC\Form\BaseModel;
-use \LRC\Form\ValidationTrait;
-use \LRC\Form\ValidationInterface;
-
 /**
  * Book model class.
  */
-class Book extends BaseModel implements ValidationInterface
+class Book extends BaseModel
 {
-    use ValidationTrait;
-
-
     public $id;
     public $title;
     public $author;

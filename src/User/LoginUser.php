@@ -3,15 +3,9 @@
 namespace Emsa\User;
 
 use \LRC\Form\BaseModel;
-use \LRC\Form\ValidationTrait;
-use \LRC\Form\ValidationInterface;
 
-class LoginUser extends BaseModel implements ValidationInterface
+class LoginUser extends BaseModel
 {
-    use ValidationTrait;
-
-
-
     public $id;
     public $username;
     public $password;
