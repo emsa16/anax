@@ -159,6 +159,31 @@ Som nämnts så använde jag mig inte av scaffolding på min anax-sida då jag i
 Kursmoment 05
 -------------
 
+### Hur gick arbetet med att lyfta ut koden ur me-sidan och placera i en egen modul?
+Jag utgick ifrån scaffold-varianten ramverk1-module och flyttade över allt som hade med kommentarer att göra till min nya modul. Det kändes naturligt att välja kommentarsmodulen eftersom det är din vi arbetat med under kursens gång, även om den är rätt så problematisk som modul, framförallt för att den är beroende av ett flertal andra moduler, som inte är tillgängliga publikt. Det handlar främst om Form-klasserna, som används för att skapa formulär och koppla ihop kommentarsfunktionaliteten med Repository-modulen. Jag inkluderade även några vyer och content-filer i modulen, de får fungera som exempel på hur modulen kan användas.
+Hela processen gick rätt så smidigt och det var enkelt att arbeta mot en lokal version av modulen genom att lägga en länk till comment-repot i vendor-mappen.
+
+### Flöt det på bra med GitHub och kopplingen till Packagist?
+Detta var den smidigaste delen av arbetet. Det var väldigt enkelt att först jobba mot dev-versionen av modulen på GitHub och att sedan lägga upp den på Packagist och bara ändra i composer.json.
+
+### Hur gick det att åter installera modulen i din me-sida med composer, kunde du följa du din installationsmanual?
+För att göra installationsprocessen så smidig som möjligt så valde jag att implementera den nya funktionalitetn som anax/di och anax/route erbjuder. Nu behöver jag inte gå in i config/di.php samt config/route.php och rota när modulen ska installeras utan kan rakt av kopiera över de modulspecifika filerna till en config/di-mapp respektive config/route-mapp. Efter detta kunde jag skapa ett enkelt bash-skript i comment-modulens script-mapp, som kopierar över allt som behövs till huvudrepot. I Anax-repots Makefile har jag lagt till ett target install-module module=emsa/comment som letar upp och exekverar skriptet.
+
+Eftersom modulen har beroenden till klasser som endast ligger i min egen Anax-installation så har jag lagt till instruktioner för hur man kan dra ner en branch av min Anax som inte innehåller något av kommentarsfunktionaliteten. Det går enkelt att bara kopera alla de instruktioner som finns i README-filen rakt av och köra dem i terminalen. Dock så måste man fortfarande hantera databasen manuellt med att fylla i uppgifter om sin databasserver i config/database.php samt lägga till de tabeller som behövs med hjälp av de DDL-filer som erbjuds.
+
+### Hur väl lyckas du enhetstesta din modul och hur mycket kodtäckning fick du med?
+Detta blev den mest utmanande delen av detta kursmoment. Jag märkte att modulen egentligen är ganska dåligt ’modulariserad’ och har knepiga beroenden till andra klasser som ställde till det. Jag gjorde lite refactoring av koden, men det kunde inte lösa alla problem. Det knepiga är att Comment-modulen, som tidigare nämnt, är beroende av Form-klasser som ligger i min lokala Anax-installation. Att jag inte inkluderat denna funktionalitet direkt i Comment-modulen beror på att de används även av andra klasser i mitt Anax-repo. Varje kommentar har en användare kopplad till sig och klassen Comment är därför också beroende av min User-klass. Detta beror på att jag använder Repository för databashantering och för varje foreign key behöver jag ange vilken klass som hanterar den tabell som nyckeln pekar på. Jag skulle gärna försöka lösa detta genom att injecta User-klassen till Comment-klassen, men har ännu inte hittat ett bra tillvägagångssätt.
+
+Det finns alltså en del klasser som behövs för att tester ska kunna köras på modulen. Jag har nu kopierat in dessa klasser i src-mappen i Comment-modulen. Detta är inte alls en lösning jag är nöjd med, men jag kunde i alla fall utesluta dessa extra klasser från att tas med i coverage-rapporten för modulen genom ett tillägg i .phpunit.xml. En framtida lösning skulle kunna vara att lägga upp dessa klasser som egna repon och sedan dra ner dem genom composer i vendor-mappen, men det löser egentligen inte det grundläggande problemet, som jag tror ligger djupt rotat i valet av Repository som databashanterare.
+
+Eftersom Comment-modulen bara består av en CommentController- och en Comment-klass, så finns det rätt så lite som kan testas. De metoder som ligger i kontrollern som är callbacks för olika routrar är inte lämpliga att enhetstesta då de framförallt anropar andra klasser och bygger ihop ett svar på en HTTP-förfrågan, såsom kontroller ska göra i MVC-modellen. Comment-klassen innehåller en enda metod och den lyckas jag testa, samt två av kontrollerns hjälpmetoder. Jag lyckas därmed nå 26 % line coverage, men jag vet inte hur mycket mer jag kan få, i alla fall inte utan att göra seriös refactoring på kommentarsklasserna (vilket iofs kanske skulle behövas).
+
+Sist och slutligen en kort kommentar om att det dyker upp några CodeSniffer-varningar för Comment-modulen på kod som även finns i Anax-repot (det gäller en Form-klass) där all kod passerar validering. Det verkar gälla olika regler i de olika repona, så jag väljer därför att ignorera dessa varningar.
+
+### Några reflektioner över skillnaden med och utan modul?
+Genom detta arbete har jag fått ytterligare förståelse för moduler och hur lätt hänt det är att man binder en klass rätt hårt. Jag tror att jag i större framtida projekt definitivt vill använda dessa metoder för att separera moduler från varandra och på det sättet tvinga fram en bättre kodstruktur, som är lättare att uppehålla och byta ut.
+
+
 Kursmoment 06
 -------------
 
