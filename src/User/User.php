@@ -92,7 +92,7 @@ class User extends BaseModel
      * Verify the acronym and the password, if successful the object contains
      * all details from the database row.
      *
-     * @param string $password the password to use.
+     * @param string $inputPassword the password to use.
      *
      * @return boolean true if passwords match, else false.
      */
