@@ -23,7 +23,7 @@
         "anax/page": "^1.0",
         "lrc-se/anax-repository": "^1.1",
         "anax/database": "^1.1",
-        "emsa/comment": "^2.0"
+        "emsa/comment": "^3.0"
     },
     "autoload": {
         "psr-4": {

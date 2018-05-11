@@ -31,7 +31,7 @@
         <div class='actions'>
             <?php if ($isLoggedIn) : ?>
                 <a href='<?= $this->url("comment/$postid/reply?id={$comment->id}#{$comment->id}") ?>'>svara</a>
-                <?php if (!$comment->deleted && ($comment->isUserOwner || $comment->isUserOwner)) : ?>
+                <?php if (!$comment->deleted && ($comment->isUserOwner || $comment->isUserAdmin)) : ?>
                     | <a href='<?= $this->url("comment/$postid/edit?id={$comment->id}#{$comment->id}") ?>'>redigera</a>
                     | <a href='<?= $this->url("comment/$postid/delete?id={$comment->id}#{$comment->id}") ?>'>radera</a>
                 <?php endif; ?>
@@ -39,13 +39,13 @@
         </div>
 
         <?php if ($action == "reply" && $actionID == $comment->id) : ?>
-            <?= $this->renderView('comment/form', ["method" => "reply", "submit" => "Skicka", "postid" => $postid, "parent_id" => $comment->id, "form" => $form]) ?>
+            <?= $this->renderView('comment/form', ["method" => "reply?id={$comment->id}", "submit" => "Skicka", "postid" => $postid, "parent_id" => $comment->id, "form" => $form]) ?>
         <?php elseif ($action == "delete" && $actionID == $comment->id) : ?>
             <?= $this->renderView("comment/delete", ["comment" => $comment, "method" => "delete?id={$comment->id}"]) ?>
         <?php endif; ?>
 
         <div class='children'>
-            <?php if (isset($comment->children)) : ?>
+            <?php if (!empty($comment->children)) : ?>
                 <?= $this->renderView('comment/comment-tree', ["comments" => $comment->children, "textfilter" => $textfilter, "postid" => $postid, "action" => $action, "actionID" => $actionID, "form" => $form, "isLoggedIn" => $isLoggedIn]) ?>
             <?php endif; ?>
         </div>

@@ -184,8 +184,28 @@ Sist och slutligen en kort kommentar om att det dyker upp några CodeSniffer-var
 Genom detta arbete har jag fått ytterligare förståelse för moduler och hur lätt hänt det är att man binder en klass rätt hårt. Jag tror att jag i större framtida projekt definitivt vill använda dessa metoder för att separera moduler från varandra och på det sättet tvinga fram en bättre kodstruktur, som är lättare att uppehålla och byta ut.
 
 
+
 Kursmoment 06
 -------------
+
+### Har du någon erfarenhet av automatiserade testar och CI sedan tidigare?
+Nej, allting som har med C*-flöden är nytt för mig, även om jag stött på begreppen några gånger under årens lopp. Det här med automatiserade tester är intressant, för i detta kursmoment har jag lagt mycket energi på att försöka skriva om koden och lägga till tester för att täcka så mycket som möjligt av koden, så det har inte känts så automatiserat den här veckan. Men nu när det jobbet är gjort så börjar väl det på riktigt automatiserade, att testerna körs varje gång jag gör en ny commit och byggtjänsterna snurrar igång.
+
+### Hur ser du på begreppen, bra, onödigt, nödvändigt, tidskrävande?
+C*-flöden är verkligen populärt just nu och hänger väl även ihop med trendbegreppet DevOps. Det är ett helt nytt universum med sina egna begrepp, metoder och verktyg så just nu känns det lite överväldigande att ta in det. Den omfattning som kursmomentet inneburit har dock varit greppbart och intressant. Jag tycker absolut att principen med CI är god och kan leda till bättre organisering och kod. Verktyg som gör kodanalys är också bra att ha till hands. Dock har jag tidigare märkt att när jag haft någon linter aktiv i Atom-miljön och lintern är överdrivet kritisk och listar en massa varningar att jag efter ett tag blir lite färgblind och slutar märka dem. Jag tycker att man inte ska utgå för mycket från kodanalysverktyg, eftersom de inte garanterar att koden är bra och effektiv. Samma sak gäller kodtäckning; har man hög kodtäckning är inte det en garanti för god kod, eftersom iaf PHPUnit verkar räknas utifrån statement coverage och inte exempelvis branch coverage som är en starkare form av coverage. Det blir då upp till en själv om man vill försöka nå detta, för det kommer inte att höja coverage-siffran. Har man istället låg kodtäckning så behöver det inte heller betyda att koden är dålig, utan bara att den är svårtestad, vilket givetvis kan vara ett problem men inte nödvändigtvis något som behöver åtgärdas, vilket jag kommer in på i nästa stycke.
+
+### Hur stor kodtäckning lyckades du uppnå i din modul?
+Jag har kämpat med refactoring på min kod men har inte lyckats bättre än att jag nått 32 % coverage. Jag vill ändå påstå att jag inte kan nå bättre täckning än så utan att gå in i de metoder i controllern som hanterar routes direkt och pysslar med redirects och vyer. Att försöka gå in och testa dessa metoder skulle kräva ett oerhört stort jobb med att mocka upp testmiljön. Dessutom så innehåller dessa otestade metoder ganska lite logik utan anropar mest andra moduler och metoder, såsom en god controller ska göra. Att testa dessa metoder skulle jag kategorisera som integrationstest snarare än enhetstest.
+Jag har ändå gjort ganska många småjusteringar som jag är nöjd med och separerat olika delar av koden in i egna metoder som jag lyckats testa. Eftersom kodtäckningen inte är så imponerande så har jag istället lagt tid på att öka kodkvalitén enligt de externa verktyg som lagts till, mer om det i nästa stycke. Jag har även till slut förstått hur jag ska hantera de beroenden som mina klasser har när jag gör tester och har mockat upp en del stubbar som behövs för de tester som körs. Detta innebär att det enda externa beroende som finns för att köra tester är till anax/DI.
+En sak som bekymrar mig med läget just nu är att nästan alla de metoder som jag just nu lyckas testa egentligen borde göras privata, eftersom de endast anropas inifrån samma klass. Skulle jag göra det så skulle min kodtäckning dock hamna på nära 0%. Därför har jag valt att behålla dem som publika metoder tills vidare.
+
+### Berätta hur det gick att integrera mot de olika externa tjänsterna?
+Det gick ganska smidigt. Dock behövde jag göra en del justeringar på grund av uppdateringar som skett sedan detta kursmoment släppts. CircleCI är numera i version 2.0 och deras konfigurationsfil är uppbyggd på ett annat sätt så det blev lite trial&error innan det fungerade som det skulle. Vidare så är PHPUnit 5 numera deprecated så jag behövde uppdatera den till version 6. Den versionen stödjer dock inte längre PHP 5.6 så jag måste uppdatera vilka versioner av PHP som Travis testar för att få grönt därifrån. Bara för att lära mig så valde jag att låta även CodeClimate visa kodtäckningen, vilket jag gjorde genom att koppla ihop den med Travis så att Travis skickar en rapport om kodtäckningen till CodeClimate när den är klar. Jag lade också till SensioLabs men deras tjänst är numera så låst bakom en betalvägg att den analysen inte gav något annat än en badge, jag kan inte se rapporten utan att betala för mig, så den tjänsten lär jag inte fortsätta använda.
+
+### Vilken extern tjänst uppskattade du mest, eller har du förslag på ytterligare externa tjänster att använda?
+Jag gillade CodeClimate ganska mycket. Även om den är rätt så snarlik Scrutinizer så tyckte jag att den var lite enklare att använda och ger tydligare rapporter om min kodkvalité, vilket jag uppskattar. Jag lyckades också rätta till en del brister i min kod tack vare den tjänsten och fick upp mitt betyg till ett A, så det är väl klart att man gillar sånt :)
+
+
 
 Kursmoment 07/10
 -------------
