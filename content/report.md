@@ -209,3 +209,61 @@ Jag gillade CodeClimate ganska mycket. Även om den är rätt så snarlik Scruti
 
 Kursmoment 07/10
 -------------
+
+### Krav 1,2,3 - Grunden
+
+Jag har valt att göra en sajt mer inspirerad av Reddit än Stack Overflow. Detta innebär att innehållet är strukturerat mer som diskussiontrådar än frågor och svar. I vissa aspekter har jag försökt göra en noggrannare klon av Reddit, medan andra aspekter är lite mer friform eller mot Stack Overflow-hållet.
+
+Sajten består av en förstasida, en sida för poster, taggar, användare, en about-sida, kontosidor, admin-sidor samt in- och utloggningssidor. Förstasidan visar de senaste posterna, de populäraste taggarna samt de aktivaste användarna. Aktivaste betyder här de som har högst rang.
+
+Post-sidan innehåller en översikt av alla poster, inklusive antal poäng och kommentarer för respektive post, och de kan sorteras enligt datum, poäng eller antal kommentarer. Man kan skapa nya inlägg via denna sida om man är inloggad eller så kan man klicka sig vidare till posternas egna sidor. Där kan man även se och sortera kommentarer, samt lägga till en egen kommentar om man är inloggad. Såväl poster som kommentarer stödjer Markdown-syntax. Är man inloggad och har skrivit någon av kommentarerna eller posten så har man möjlighet att redigera eller radera dem.
+
+Vidare finns sidan Tags som visar de taggar som används, hur många poster som är kopplade till dem, samt kan sortera dem enligt namn eller popularitet. Klickar man på en tagg här eller någon annanstans på sajten så kommer man till en översikt av alla poster som har den taggen kopplad till sig.
+
+På sidan Users kan man se alla registrerade användare och sortera dem enligt namn eller rang, samt klicka sig vidare till deras profiler. Är man inloggad så har man även tillgång till sin egen konto-sida, där man kan ändra detaljer kring sitt konto. Kontobilden är en automatiskt skapad gravatar-bild baserad på ens epostadress. Är man inloggad som admin (inloggning: admin / admin) så har man även en admin-sida (tillgänglig via en länk i footern) där man kan hantera användarkonton. Admin har även möjlighet att redigera och radera alla poster och kommentarer i Post-sektionen av sajten.
+
+Sajten som driftas på studentservern har exempelinnehåll inlagt och där ingår följande konton:
+admin / admin
+doe / doe
+test1 / test1
+test2 / test2
+test3 / test3
+test4 / test4
+
+Till slut finns det en enkel About-sida med länk till repot på Github. Allt är stylat i gräsligt fula färger, för att matcha det tema som sajten handlar om.
+
+Projektet ligger även upplagt på [Github](https://github.com/emsa16/ramverk1-project), tillsammans med enkla instruktioner för hur man installerar projektet på egen hand. Det är rätt enkelt, det mesta av jobbet kring installationen är att sätta upp databasen. Jag har lagt exempelinnehåll i en separat fil, så får man själv välja om man installerar projektet med detta exempelinnehåll eller ej. Repot är även kopplat till Travis och Scrutinizer, där de passerar byggtesterna.
+
+
+### Krav 4 - Frågor
+
+Eftersom jag valt att skapa en sajt mer lik Reddit än Stack Overflow så funkar det inte riktigt med en funktion att kunna markera svar som accepterade. Istället kör jag mer på Reddits funktion att kunna ge inlägg "guld". Den användare som skapat en post kan välja att "belöna" bra kommentarer till den posten genom att klicka på "reward" under kommentaren. Det dyker då upp en stjärna bredvid posten för att markera dess status, och dessa belönings-badges har en stor påverkan på användarens rang.
+
+Man kan rösta på poster och kommentarer om man är inloggad. För varje post/kommentar så kan en användare ge en röst, upp eller ner. Man kan ändra sin röst eller ta bort den men samma konto kan aldrig ge mer en röst till samma kommentar/post. Såväl poster som kommentarer inuti poster kan sorteras enligt "best", som då visar dem i poängsumme-ordning. Sajten visar också tydligt hur många poäng och kommentarer varje post har.
+
+
+### Krav 5 - Användare
+
+Varje användare har en öppen profilsida, som alla kan se, även de som inte är inloggade. Profilsidan visar användarens rang samt aktivitet på sidan: poster, kommentarer, alla deras röstningar samt givna och emottagna belönings-badges.
+
+Varje användare har en rang kopplad till sig. Denna visas på profilsidan samt bredvid användarnamnet i varje post eller kommentar. Rangen visar på hur populär och aktiv användaren är. Rangen beräknas på följande sätt: varje mottagen guldstjärna multipliceras med 25, varje röst på en kommentar eller post multipliceras med 5 (inklusive negativa röster) och till slut adderas antalet poster och kommentarer användaren gjort till resultatet. Det är alltså kvalitet över kvantitet som gäller för att få hög rang.
+
+
+### Allmänt om projektet
+
+Projektet har flutit på väl. Det största problemet har varit att jag varit tvungen att jobba lite grann nu och då, utspritt över en ganska lång tid, så det har varit kämpigt att komma ihåg var man befann sig när man tog upp projektet igen efter en tids frånvaro.
+
+Jag började med att scaffolda fram en grundstomme. Många av de system jag byggt under kursens gång kunde jag återanvända. Användar- och admin-systemet kunde jag använda rakt av från tidigare kursmoment. Däremot så använde jag inte den kommentarsmodul som jag jobbat med under kursens gång. Orsaken till detta är den byggde på en struktur där själva posterna var lagrade i en flatfile-struktur. Detta gjorde den inkompatibel med kraven på att användare ska kunna skapa egna nya poster. Det kändes även annars rimligare att såväl kommentarer som poster skulle ligga i databas och att man då kunde koppla ihop dem med foreign keys. Jag behövde även lägga till stöd för röster och belöningar i kommentarsmodulen, samt ville översätta den till engelska. Allt detta gjorde att jag tog beslutet att inte använda en separat kommentarsmodul, utan integrera koden från min tidigare modul in i detta projekt. Jag kunde ha valt att göra en ny version av min modul, men jag bedömde att det skulle gå snabbare såhär.
+
+Jag valde även att fortsätta använda Repository-modulen som kurskamraten LRC skapat, eftersom den används i min gamla kommentarsmodul. Jag är inte helt nöjd med hur jag använder den i detta projekt. Eftersom jag normaliserat databasen lite grann i och med införandet av röster och belöningar så skulle joins ha suttit bra i databasanropen för att minska antalet anrop och göra processen effektivare. Dock hade jag inte tid att studera denna modul i närmare detalj för att kunna se om detta var möjligt.
+
+
+### Om kursen
+
+Denna kurs har innehållit en massa koncept på en bred skala. Jag har uppskattat allt det jag lärt mig: djupdykning i PHP, design patterns, ramverksstrukturer såsom MVC, samt koncept som SOLID och DI. Det har varit lite mer teori än tidigare, främst kring olika modeller och sätt att strukturera sin kod. Jag har upplevt att det varit en intressant men ganska utmanande uppgift att försöka jämföra och förstå dessa modeller. De rör sig på så stor skala att jag ofta haft svårt att greppa vad de egentligen innebär. Jag har också uppskattat den genomgående uppgiften genom kursen att skapa ett eget kommentarssystem, nyttigt att lära sig förstå hur de fungerar.
+
+Jag skulle önska mig att kursen gick in mer på design patterns och hjälpte oss att förstå dem och hur man ska tänka kring sådana mer abstrakta koncept. Jag skulle även vilja att vi satte mer tid på att jämföra olika ramverk med varandra, eftersom jag tror att detta kommer att vara en viktig färdighet i yrkeslivet, men jag upplever att det är väldigt svårt att kunna urskilja vilket alternativ man ska välja, när det finns så många aspekter att beakta gällande ramverk. Jag gillade också introt till CI och skulle gärna ha fått mer info kring DevOps-metodologier. Dock förstår jag att allt inte kan rymmas in i en och samma kurs, men just DevOps känns också som något väldigt efterfrågat i dagens arbetsmarknad.
+
+Man kunde plocka bort arbetet med REM-servern och gå direkt på en databas, det kändes som ett onödigt mellansteg och det blev mycket jobb att göra om systemet till att stödja en databas istället i mitten av kursen. Det kan ju också ha varit min approach som ställde till det, då jag valde att köra med ett Repository-mönster för databasen istället för det givna Active Record, vilket gjorde att det tog extra tid.
+
+Jag har uppskattat kursen som helhet och den utmaning den gav mig. Den får 6/10. Tack för denna gång!
